@@ -1,6 +1,6 @@
-# Deeplinks SDK
+# iagDynamicLinkSdk
 
-Deeplinks SDK is a lightweight library for handling “short” links, providing functionality similar to the deprecated Firebase Dynamic Links.
+iagDynamicLinkSdk is a lightweight library for handling “short” links, providing functionality similar to the deprecated Firebase Dynamic Links.
 
 ---
 
