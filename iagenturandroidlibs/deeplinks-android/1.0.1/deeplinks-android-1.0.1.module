@@ -1,0 +1,106 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "iagenturandroidlibs",
+    "module": "deeplinks-android",
+    "version": "1.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "deeplinks-android-1.0.1.aar",
+          "url": "deeplinks-android-1.0.1.aar",
+          "size": 24365,
+          "sha512": "4ec4b0fb4b5947f1cd2498e2822e8072ad640673a06d65df4aeb4f706336b8df162a112229d6a2594645b9d57f1e950343d1719cc6d8e8eacc43a365816045c5",
+          "sha256": "67b207237ab1616094fa8bd7d7ce162318f57613006a1523b7a65d2b8f29a65e",
+          "sha1": "40f126c536ed442a62a27491df6014d40fac6c7f",
+          "md5": "fba982553e1e6f4ee70189c2947adf85"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "deeplinks-android-1.0.1.aar",
+          "url": "deeplinks-android-1.0.1.aar",
+          "size": 24365,
+          "sha512": "4ec4b0fb4b5947f1cd2498e2822e8072ad640673a06d65df4aeb4f706336b8df162a112229d6a2594645b9d57f1e950343d1719cc6d8e8eacc43a365816045c5",
+          "sha256": "67b207237ab1616094fa8bd7d7ce162318f57613006a1523b7a65d2b8f29a65e",
+          "sha1": "40f126c536ed442a62a27491df6014d40fac6c7f",
+          "md5": "fba982553e1e6f4ee70189c2947adf85"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "deeplinks-android-1.0.1-sources.jar",
+          "url": "deeplinks-android-1.0.1-sources.jar",
+          "size": 10791,
+          "sha512": "76b59061619aa8a9030ed21eddd2b65904f45c11e9e6daaaf1db780ac6ba7f6c68a1d0ab63957c48bde1a862df9a115197f39880caa6d3831f35c161cd366067",
+          "sha256": "aff23056f70dc368db6eb52782dce8c7301e551ad85af6cb5f02c3dba5d4fb60",
+          "sha1": "932c41dbf3d727d639dc57a3f8c7e026ec6bfc95",
+          "md5": "ca49b6430183802424bfca87c37c865a"
+        }
+      ]
+    }
+  ]
+}
