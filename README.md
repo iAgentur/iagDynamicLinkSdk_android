@@ -1,83 +1,113 @@
-# iagDynamicLinkSdk
+# DeeplinkSDK for Android
 
-iagDynamicLinkSdk is a lightweight library for handling “short” links, providing functionality similar to the deprecated Firebase Dynamic Links.
+**DeeplinkSDK** is a lightweight library for handling dynamic links and deep linking in Android applications — a drop-in replacement for the deprecated Firebase Dynamic Links.
 
 ---
 
-## Getting Started
+## Requirements
 
-### 1️⃣ Add Host String
+- Android API 24+
+- Kotlin 2.0+
 
-Define a non-translatable string in `res/values/strings.xml` to represent your link host:
+---
+
+## Installation
+
+Add the GitHub-hosted Maven repository and the dependency to your app's `build.gradle.kts`:
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://raw.githubusercontent.com/iAgentur/iagDynamicLinkSdk_android/main/")
+    }
+}
+
+dependencies {
+    implementation("iagenturandroidlibs:deeplinks-android:1.0.1")
+}
+```
+
+Or Groovy `build.gradle`:
+
+```groovy
+repositories {
+    maven { url 'https://raw.githubusercontent.com/iAgentur/iagDynamicLinkSdk_android/main/' }
+}
+
+dependencies {
+    implementation 'iagenturandroidlibs:deeplinks-android:1.0.1'
+}
+```
+
+---
+
+## Setup
+
+### 1. Add Host String
+
+Define a non-translatable string in `res/values/strings.xml`:
 
 ```xml
 <string name="appshort_host" translatable="false">yourapp.appshort.link</string>
 ```
 
----
+### 2. Add Intent Filter
 
-### 2️⃣ Add Intent Filter
-
-Add the following intent filter to your `AndroidManifest.xml` inside the relevant `<activity>` (usually your launcher Activity):
+In `AndroidManifest.xml`, add to your launcher `<activity>`:
 
 ```xml
 <intent-filter android:autoVerify="true">
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-
     <data android:scheme="https" />
     <data android:host="@string/appshort_host" />
 </intent-filter>
 ```
 
-This allows your app to open links matching your host.
+### 3. Initialize the SDK
 
----
-
-### 3️⃣ Initialize SDK
-
-Initialize the SDK in your `Application` class, typically in `onCreate()`:
+In your `Application` class `onCreate()`:
 
 ```kotlin
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
         DeeplinkSdk.init(
             host = "https://${getString(R.string.appshort_host)}",
-            apiKey = "{yourApiKey}"
+            apiKey = "yourApiKey"
         )
     }
 }
 ```
 
----
+### 4. Handle Deep Links
 
-### 4️⃣ Handle Deeplinks in Activity
-
-Retrieve and handle incoming short links in your Activity:
+Handle both cold starts and cases where the app is already running:
 
 ```kotlin
-DeeplinkSdk.getInstance()
-    .getDynamicLink(this, intent)
-    .addOnSuccessListener { data ->
-        // data.url         -> Link
-        // data.fallbackUrl -> Fallback for Android
-        // data.desktopUrl  -> Desktop version
-    }
-    .addOnFailureListener { throwable ->
-        // Handle errors
-    }
+// Called on cold start
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    handleIntent(intent)
+}
+
+// Called when app is already running
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    handleIntent(intent)
+}
+
+private fun handleIntent(intent: Intent) {
+    DeeplinkSdk.getInstance()
+        .getDynamicLink(this, intent)
+        .addOnSuccessListener { data ->
+            // data.url         — resolved link
+            // data.fallbackUrl — Android fallback URL
+            // data.desktopUrl  — desktop fallback URL
+        }
+        .addOnFailureListener { throwable ->
+            // handle error
+        }
+}
 ```
-
-- `data.url` — resolved link  
-- `data.fallbackUrl` — optional mobile fallback URL  
-- `data.desktopUrl` — optional desktop fallback URL
-
----
-
-### Notes
-
-- Ensure your Activity handles both cold starts and already-running instances (consider `onNewIntent()` for the latter).
-
